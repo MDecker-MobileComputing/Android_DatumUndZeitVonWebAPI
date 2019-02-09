@@ -11,12 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestFactory;
-import com.google.api.client.http.HttpResponse;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 /**
@@ -77,45 +76,41 @@ public class MainActivity extends Activity {
 	 * weil ein Internet-Zugriff länger dauern kann (mehrere Sekunden oder Minuten),
 	 * so dass die App wegen <i>"Application Not Responding" (ANR)</i> ggf.
 	 * vom Nutzer abgebrochen würde.
-	 * <br><br>
-	 *
-	 * In Android ist seit API-Level 8 die HTTP-Client-Klasse <i>AndroidHttpClient</i>
-	 * verfügbar, siehe <i>http://developer.android.com/reference/android/net/http/AndroidHttpClient.html</i> .
-	 * Wegen Bugs in dieser Klasse wird aber eine externe HTTP-Client-Library verwendet,
-	 * siehe auch <i>http://android-developers.blogspot.de/2011/09/androids-http-clients.html</i>.
-	 * Es wird deshalb eine externe HTTP-Client-Library verwendet, nämlich <i>"google-http-java-client"</i> ,
-	 * siehe <i>https://developers.google.com/api-client-library/java/google-http-java-client/download</i> .
-	 * Die entsprechenden JAR-Dateien befindet sich deshalb im Unter-Ordner "app/libs/" des Projekt-
-	 * Verzeichnisses und sind in der Datei "app/build.gradle" eingetragen.
 	 *
 	 * @return String mit JSON-Dokument, das als Antwort zurückgeliefert wurde.
 	 */
 	protected String holeDatenVonWebAPI() throws Exception {
 
-		// Schritt 1: Request-Factory holen
-		HttpTransport      httpTransport  = new NetHttpTransport();
-		HttpRequestFactory requestFactory = httpTransport.createRequestFactory();
+        URL url                                = null;
+        HttpURLConnection conn                 = null;
+        String            httpErgebnisDokument = "";
 
 
-		// Schritt 2: URL erzeugen und ggf. URL-Parametern hinzufügen
-	    GenericUrl url = new GenericUrl("http://time.jsontest.com"); // keine httpS-URL, also android:usesCleartextTraffic="true" in <application>-Tag in der Manifest-Datei setzen
-	    //url.put("parameter_1_key", "parameter_1_wert" ); // hier könnten noch ggf. benötigte URL-Parameter hinzugefuegt werden
-	    //url.put("parameter_2_key", "parameter_2_wert" );
-	    // ...?parameter_1_key=parameter_1_wert&parameter_2_key=parameter_2_wert
+        url  = new URL("http://time.jsontest.com"); // keine httpS-URL, also android:usesCleartextTraffic="true" in Manifest-Datei für <application> setzen
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET"); // Eigentlich nicht nötig, weil "GET" Default-Wert ist.
 
+        if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
 
-	    // Schritt 3: eigentliches Absetzen des Requests
-	    HttpRequest  request      = requestFactory.buildGetRequest(url);
-	    HttpResponse httpResponse = request.execute();
+            String errorMessage = "HTTP-Fehler: " + conn.getResponseMessage();
+            throw new Exception( errorMessage );
 
+        } else {
 
-	    // Schritt 4: Antwort-String (JSON-Format) zurückgeben
-	    String jsonResponseString = httpResponse.parseAsString();
+            InputStream is        = conn.getInputStream();
+            InputStreamReader ris = new InputStreamReader(is);
+            BufferedReader reader = new BufferedReader(ris);
 
-	    Log.i(TAG4LOGGING, "JSON-String erhalten: " + jsonResponseString);
+            // JSON-Dokument zeilenweise einlesen
+            String zeile = "";
+            while ( (zeile = reader.readLine()) != null) {
+                httpErgebnisDokument += zeile;
+            }
+        }
 
+	    Log.i(TAG4LOGGING, "JSON-String erhalten: " + httpErgebnisDokument);
 
-		return jsonResponseString;
+        return httpErgebnisDokument;
 	}
 
 
