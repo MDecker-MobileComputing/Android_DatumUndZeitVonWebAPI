@@ -98,7 +98,7 @@ public class MainActivity extends Activity {
 
 
 		// Schritt 2: URL erzeugen und ggf. URL-Parametern hinzufügen
-	    GenericUrl url = new GenericUrl("http://time.jsontest.com");
+	    GenericUrl url = new GenericUrl("http://time.jsontest.com"); // keine httpS-URL, also android:usesCleartextTraffic="true" in <application>-Tag in der Manifest-Datei setzen
 	    //url.put("parameter_1_key", "parameter_1_wert" ); // hier könnten noch ggf. benötigte URL-Parameter hinzugefuegt werden
 	    //url.put("parameter_2_key", "parameter_2_wert" );
 	    // ...?parameter_1_key=parameter_1_wert&parameter_2_key=parameter_2_wert
