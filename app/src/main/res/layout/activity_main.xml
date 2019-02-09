@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			    xmlns:tools="http://schemas.android.com/tools"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:background="#FFFFFF"
+			    tools:context="de.mide.datumzeitvonwebapi.MainActivity" >
+
+
+    <TextView android:id="@+id/ergebnisTextView"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentTop="true"              
+              android:layout_margin="10dp"
+              android:background="#F0F0F0"
+              android:textSize="20sp"
+              android:layout_above="@+id/starteWebRequestButton"
+		      android:maxLines="200"
+		      android:scrollbars="vertical"
+		      android:text="@string/kurzanleitung" />
+
+              
+    <Button android:id="@id/starteWebRequestButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="onStartButtonBetaetigt"
+            android:text="@string/start_button_label" />
+    
+</RelativeLayout>

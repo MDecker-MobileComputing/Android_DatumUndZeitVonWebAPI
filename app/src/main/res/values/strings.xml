@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Datum &amp; Zeit von Web-API</string>
+    <string name="title_activity_main">Datum &amp; Zeit</string>
+
+    <string name="kurzanleitung">Drücken Sie auf den Button unten, um über einen Web-API-Request
+                                 Datum &amp; Uhrzeit von <i>jsontest.com</i> abzurufen.</string>
+    
+    
+    <string name="start_button_label">Datum &amp; Uhrzeit abrufen</string>
+    
+</resources>

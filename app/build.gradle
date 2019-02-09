@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "de.mide.datumzeitvonwebapi"
+        minSdkVersion 14
+        targetSdkVersion 28
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"        
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+	
+	// Alle jar-Dateien im Verzeichnis "app/libs" einbinden.	
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+		
+	/*
+    implementation files('libs/google-http-client-1.23.0.jar')
+    implementation files('libs/google-http-client-android-1.23.0.jar')
+	*/
+}
