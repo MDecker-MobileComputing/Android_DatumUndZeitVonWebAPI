@@ -17,14 +17,3 @@ android {
         }
     }
 }
-
-dependencies {
-	
-	// Alle jar-Dateien im Verzeichnis "app/libs" einbinden.	
-	implementation fileTree(dir: 'libs', include: ['*.jar'])
-		
-	/*
-    implementation files('libs/google-http-client-1.23.0.jar')
-    implementation files('libs/google-http-client-android-1.23.0.jar')
-	*/
-}
