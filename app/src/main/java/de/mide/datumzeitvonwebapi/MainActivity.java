@@ -22,6 +22,7 @@ import java.net.URL;
  * Demo-App für Abrufen von Daten über Web-API im JSON-Format.
  * Es werden Datum & Uhrzeit von <i>jsontest.com</i> abgerufen:
  * <a href="http://www.jsontest.com/#date">http://www.jsontest.com/#date</a>
+ * <br><br>
  *
  * This file is licensed under the terms of the BSD 3-Clause License.
  */

@@ -2,8 +2,12 @@
 
 Simple Android app that fetches time and date from a Web API provided by [jsontest.com](http://www.jsontest.com/#date).
 
-The author of this app is not related to the developer/provider of [jsontest.com](http://www.jsontest.com/).
+URL / endpoint that is queried: http://time.jsontest.com
 
+
+The author of this app is *NOT* related to the developer/provider of [jsontest.com](http://www.jsontest.com/).
+
+Identifiers (names for classes, variables and methods), UI text and (JavaDoc) comments are in German only.
 
 ----
 ## Screenshots
