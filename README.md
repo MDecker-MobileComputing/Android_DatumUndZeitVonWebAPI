@@ -17,6 +17,10 @@ Identifiers (names for classes, variables and methods), UI text and (JavaDoc) co
 
 <br>
 
+The screenshots were taken from emulator.
+
+<br>
+
 ----
 # License
 
