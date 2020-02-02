@@ -17,7 +17,7 @@ Identifiers (names for classes, variables and methods), UI text and (JavaDoc) co
 
 <br>
 
-The screenshots were taken from emulator.
+The screenshots were taken from the app running in the Android SDK's emulator.
 
 <br>
 

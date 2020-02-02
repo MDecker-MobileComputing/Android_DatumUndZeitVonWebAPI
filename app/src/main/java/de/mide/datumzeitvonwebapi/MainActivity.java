@@ -44,6 +44,7 @@ public class MainActivity extends Activity {
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
@@ -105,6 +106,7 @@ public class MainActivity extends Activity {
             // JSON-Dokument zeilenweise einlesen
             String zeile = "";
             while ( (zeile = reader.readLine()) != null) {
+
                 httpErgebnisDokument += zeile;
             }
         }
@@ -139,6 +141,7 @@ public class MainActivity extends Activity {
 	protected String parseJSON(String jsonString) throws Exception {
 
 		if (jsonString == null || jsonString.trim().length() == 0) {
+
 			return "Leeres JSON-Objekt von Web-API erhalten.";
 		}
 
@@ -185,6 +188,7 @@ public class MainActivity extends Activity {
 						           "\n\nAchtung: Unterschied UTC zu deutscher Zeit eine oder bei Sommerzeit zwei Stunden." );
 			}
 			catch (Exception ex) {
+
 				ergbnisDarstellen( "Exception aufgetreten:\n\n" + ex.getMessage() );
 			}
 		}
