@@ -33,7 +33,8 @@ public class MainActivity extends Activity {
 	/** Button mit dem der Web-Request gestartet wird. */
 	protected Button _startButton = null;
 
-	/** TextView zur Anzeige des Ergebnisses des Web-Requests (also Datum + Uhrzeit),
+	/**
+	 * TextView zur Anzeige des Ergebnisses des Web-Requests (also Datum + Uhrzeit),
 	 * auch zur Anzeige von Fehlermeldungen.
 	 */
 	protected TextView _ergebnisTextView = null;
@@ -51,7 +52,7 @@ public class MainActivity extends Activity {
 		_startButton      = findViewById( R.id.starteWebRequestButton );
 		_ergebnisTextView = findViewById( R.id.ergebnisTextView       );
 
-		_ergebnisTextView.setMovementMethod( new ScrollingMovementMethod() ); // um vertikales Scrolling zu ermöglichen
+		_ergebnisTextView.setMovementMethod( new ScrollingMovementMethod() ); // vertikales Scrolling ermöglichen
 	}
 
 
