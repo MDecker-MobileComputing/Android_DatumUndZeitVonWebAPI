@@ -1,6 +1,7 @@
 package de.mide.datumzeitvonwebapi;
 
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -81,8 +83,10 @@ public class MainActivity extends Activity {
 	 * vom Nutzer abgebrochen würde.
 	 *
 	 * @return String mit JSON-Dokument, das als Antwort zurückgeliefert wurde.
+	 *
+	 * @throw IOException  Ein-/Ausgabefehler
 	 */
-	protected String holeDatenVonWebAPI() throws Exception {
+	protected String holeDatenVonWebAPI() throws IOException {
 
         URL url                                = null;
         HttpURLConnection conn                 = null;
@@ -96,7 +100,7 @@ public class MainActivity extends Activity {
         if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
 
             String errorMessage = "HTTP-Fehler: " + conn.getResponseMessage();
-            throw new Exception( errorMessage );
+            throw new IOException( errorMessage );
 
         } else {
 
@@ -138,8 +142,10 @@ public class MainActivity extends Activity {
 	 * @param jsonString JSON-Dokument, das die Web-API zurückgeliefert hat.
 	 *
 	 * @return String mit Ergebnis (Datum & Uhrzeit), zur Anzeige auf UI.
+	 *
+	 * @throws JSONException  Fehler beim Parsen von JSON (Syntax-Fehler in JSON).
 	 */
-	protected String parseJSON(String jsonString) throws Exception {
+	protected String parseJSON(String jsonString) throws JSONException {
 
 		if (jsonString == null || jsonString.trim().length() == 0) {
 
