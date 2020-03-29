@@ -30,63 +30,63 @@ import java.net.URL;
  */
 public class MainActivity extends Activity {
 
-	public static final String TAG4LOGGING = "DatumZeitVonWebAPI";
+    public static final String TAG4LOGGING = "DatumZeitVonWebAPI";
 
-	/** Button mit dem der Web-Request gestartet wird. */
-	protected Button _startButton = null;
+    /** Button mit dem der Web-Request gestartet wird. */
+    protected Button _startButton = null;
 
-	/**
-	 * TextView zur Anzeige des Ergebnisses des Web-Requests (also Datum + Uhrzeit),
-	 * auch zur Anzeige von Fehlermeldungen.
-	 */
-	protected TextView _ergebnisTextView = null;
-
-
-	/**
-	 * Lifecycle-Methode: Layout für UI laden und Referenzen auf UI-Elemente holen.
-	 */
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		_startButton      = findViewById( R.id.starteWebRequestButton );
-		_ergebnisTextView = findViewById( R.id.ergebnisTextView       );
-
-		_ergebnisTextView.setMovementMethod( new ScrollingMovementMethod() ); // vertikales Scrolling ermöglichen
-	}
+    /**
+     * TextView zur Anzeige des Ergebnisses des Web-Requests (also Datum + Uhrzeit),
+     * auch zur Anzeige von Fehlermeldungen.
+     */
+    protected TextView _ergebnisTextView = null;
 
 
-	/**
-	 * Event-Handler für Start-Button, wird in Layout-Datei
-	 * mit Attribut <tt>android:onClick</tt> zugewiesen.
-	 */
-	public void onStartButtonBetaetigt(View view) {
+    /**
+     * Lifecycle-Methode: Layout für UI laden und Referenzen auf UI-Elemente holen.
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
 
-		_startButton.setEnabled(false); // Button deaktivieren während ein HTTP-Request läuft
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-		_ergebnisTextView.setText("Starte HTTP-Request ...");
+        _startButton      = findViewById( R.id.starteWebRequestButton );
+        _ergebnisTextView = findViewById( R.id.ergebnisTextView       );
+
+        _ergebnisTextView.setMovementMethod( new ScrollingMovementMethod() ); // vertikales Scrolling ermöglichen
+    }
 
 
-	    // Hintergrund-Thread mit HTTP-Request starten
-		MeinHintergrundThread mht = new MeinHintergrundThread();
-		mht.start();
-	}
+    /**
+     * Event-Handler für Start-Button, wird in Layout-Datei
+     * mit Attribut <tt>android:onClick</tt> zugewiesen.
+     */
+    public void onStartButtonBetaetigt(View view) {
+
+        _startButton.setEnabled(false); // Button deaktivieren während ein HTTP-Request läuft
+
+        _ergebnisTextView.setText("Starte HTTP-Request ...");
 
 
-	/**
-	 * In dieser Methode wird der HTTP-Request zur Web-API durchgeführt.
-	 * Achtung: Diese Methode darf nicht im Main-Thread ausgeführt werden,
-	 * weil ein Internet-Zugriff länger dauern kann (mehrere Sekunden oder Minuten),
-	 * so dass die App wegen <i>"Application Not Responding" (ANR)</i> ggf.
-	 * vom Nutzer abgebrochen würde.
-	 *
-	 * @return String mit JSON-Dokument, das als Antwort zurückgeliefert wurde.
-	 *
-	 * @throw IOException  Ein-/Ausgabefehler
-	 */
-	protected String holeDatenVonWebAPI() throws IOException {
+        // Hintergrund-Thread mit HTTP-Request starten
+        MeinHintergrundThread mht = new MeinHintergrundThread();
+        mht.start();
+    }
+
+
+    /**
+     * In dieser Methode wird der HTTP-Request zur Web-API durchgeführt.
+     * Achtung: Diese Methode darf nicht im Main-Thread ausgeführt werden,
+     * weil ein Internet-Zugriff länger dauern kann (mehrere Sekunden oder Minuten),
+     * so dass die App wegen <i>"Application Not Responding" (ANR)</i> ggf.
+     * vom Nutzer abgebrochen würde.
+     *
+     * @return String mit JSON-Dokument, das als Antwort zurückgeliefert wurde.
+     *
+     * @throw IOException  Ein-/Ausgabefehler
+     */
+    protected String holeDatenVonWebAPI() throws IOException {
 
         URL url                                = null;
         HttpURLConnection conn                 = null;
@@ -116,120 +116,120 @@ public class MainActivity extends Activity {
             }
         }
 
-	    Log.i(TAG4LOGGING, "JSON-String erhalten: " + httpErgebnisDokument);
+        Log.i(TAG4LOGGING, "JSON-String erhalten: " + httpErgebnisDokument);
 
         return httpErgebnisDokument;
-	}
+    }
 
 
-	/**
-	 * Parsen des JSON-Dokuments <i>jsonString</i>, das von der Web-API
-	 * zurückgeliefert wurde.<br><br>
-	 *
-	 * Beispiel für ein JSON-Dokument von der Web-API:
-	 * <pre>
-	 * {
-	 *   "time": "05:51:48 PM",
+    /**
+     * Parsen des JSON-Dokuments <i>jsonString</i>, das von der Web-API
+     * zurückgeliefert wurde.<br><br>
+     *
+     * Beispiel für ein JSON-Dokument von der Web-API:
+     * <pre>
+     * {
+     *   "time": "05:51:48 PM",
      *   "milliseconds_since_epoch": 1419789108674,
      *   "date": "12-28-2014"
      * }
-	 * </pre>
-	 * <br><br>
+     * </pre>
+     * <br><br>
      *
-	 * Es wird der in Android seit API-Level eingebaute JSON-Parser
-	 * verwendet: <i>http://developer.android.com/reference/org/json/JSONObject.html</i> .
-	 *
-	 * @param jsonString JSON-Dokument, das die Web-API zurückgeliefert hat.
-	 *
-	 * @return String mit Ergebnis (Datum & Uhrzeit), zur Anzeige auf UI.
-	 *
-	 * @throws JSONException  Fehler beim Parsen von JSON (Syntax-Fehler in JSON).
-	 */
-	protected String parseJSON(String jsonString) throws JSONException {
+     * Es wird der in Android seit API-Level eingebaute JSON-Parser
+     * verwendet: <i>http://developer.android.com/reference/org/json/JSONObject.html</i> .
+     *
+     * @param jsonString JSON-Dokument, das die Web-API zurückgeliefert hat.
+     *
+     * @return String mit Ergebnis (Datum & Uhrzeit), zur Anzeige auf UI.
+     *
+     * @throws JSONException  Fehler beim Parsen von JSON (Syntax-Fehler in JSON).
+     */
+    protected String parseJSON(String jsonString) throws JSONException {
 
-		if (jsonString == null || jsonString.trim().length() == 0) {
+        if (jsonString == null || jsonString.trim().length() == 0) {
 
-			return "Leeres JSON-Objekt von Web-API erhalten.";
-		}
+            return "Leeres JSON-Objekt von Web-API erhalten.";
+        }
 
 
         // eigentliches Parsen der JSON-Datei
-		JSONObject jsonObject = new JSONObject( jsonString );
+        JSONObject jsonObject = new JSONObject( jsonString );
 
-		// Zwei Attribute abfragen
-		String zeitString  = jsonObject.getString( "time" );
-		String datumString = jsonObject.getString( "date" );
-
-
-		// String für Ausgabe auf UI zusammenbauen
-		return "Zeit (UTC):\n"              + zeitString  +
-			   "\n\nDatum (MM-DD-YYYY):\n"  + datumString;
-	}
+        // Zwei Attribute abfragen
+        String zeitString  = jsonObject.getString( "time" );
+        String datumString = jsonObject.getString( "date" );
 
 
-	/* *************************** */
-	/* *** Start innere Klasse *** */
-	/* *************************** */
-
-	/**
-	 * Zugriff auf Web-API (Internet-Zugriff) wird in
-	 * eigenen Thread ausgelagert, damit der Main-Thread
-	 * nicht blockiert wird.
-	 */
-	protected class MeinHintergrundThread extends Thread {
-
-		/**
-		 * Der Inhalt in der überschriebenen <i>run()</i>-Methode
-		 * wird in einem Hintergrund-Thread ausgeführt.
-		 */
-		@Override
-		public void run() {
-
-			try {
-
-				String jsonDocument = holeDatenVonWebAPI();
-
-				String ergString = parseJSON(jsonDocument);
-
-				ergbnisDarstellen( "Ergebnis von Web-Request:\n\n" + ergString +
-						           "\n\nAchtung: Unterschied UTC zu deutscher Zeit eine oder bei Sommerzeit zwei Stunden." );
-			}
-			catch (Exception ex) {
-
-				ergbnisDarstellen( "Exception aufgetreten:\n\n" + ex.getMessage() );
-			}
-		}
+        // String für Ausgabe auf UI zusammenbauen
+        return "Zeit (UTC):\n"              + zeitString  +
+               "\n\nDatum (MM-DD-YYYY):\n"  + datumString;
+    }
 
 
-		/**
-		 * Methode um Ergebnis-String in TextView darzustellen. Da
-		 * es sich hierbei um einen UI-Zugriff handelt, müssen
-		 * wir mit der <i>post()</i>-Methode dafür sorgen, dass die
-		 * UI-Zugriffe aus dem Main-Thread heraus durchgeführt werden.
-		 * Der Start-Button wird auch wieder aktiviert.
-		 *
-		 * @param ergebnisStr Nachricht, die in TextView-Element dargestellt werden soll.
-		 */
-		protected void ergbnisDarstellen(String ergebnisStr) {
+    /* *************************** */
+    /* *** Start innere Klasse *** */
+    /* *************************** */
 
-			final String finalString = ergebnisStr;
+    /**
+     * Zugriff auf Web-API (Internet-Zugriff) wird in
+     * eigenen Thread ausgelagert, damit der Main-Thread
+     * nicht blockiert wird.
+     */
+    protected class MeinHintergrundThread extends Thread {
 
-			_startButton.post( new Runnable() { // wir könnten auch die post()-Methode des TextView-Elements verwenden
-				@Override
-				public void run() {
+        /**
+         * Der Inhalt in der überschriebenen <i>run()</i>-Methode
+         * wird in einem Hintergrund-Thread ausgeführt.
+         */
+        @Override
+        public void run() {
 
-					_startButton.setEnabled(true);
+            try {
 
-					_ergebnisTextView.setText(finalString);
-				}
-			});
+                String jsonDocument = holeDatenVonWebAPI();
 
-		}
+                String ergString = parseJSON(jsonDocument);
 
-	};
+                ergbnisDarstellen( "Ergebnis von Web-Request:\n\n" + ergString +
+                                   "\n\nAchtung: Unterschied UTC zu deutscher Zeit eine oder bei Sommerzeit zwei Stunden." );
+            }
+            catch (Exception ex) {
 
-	/* *************************** */
-	/* *** Ende innere Klasse  *** */
-	/* *************************** */
+                ergbnisDarstellen( "Exception aufgetreten:\n\n" + ex.getMessage() );
+            }
+        }
+
+
+        /**
+         * Methode um Ergebnis-String in TextView darzustellen. Da
+         * es sich hierbei um einen UI-Zugriff handelt, müssen
+         * wir mit der <i>post()</i>-Methode dafür sorgen, dass die
+         * UI-Zugriffe aus dem Main-Thread heraus durchgeführt werden.
+         * Der Start-Button wird auch wieder aktiviert.
+         *
+         * @param ergebnisStr Nachricht, die in TextView-Element dargestellt werden soll.
+         */
+        protected void ergbnisDarstellen(String ergebnisStr) {
+
+            final String finalString = ergebnisStr;
+
+            _startButton.post( new Runnable() { // wir könnten auch die post()-Methode des TextView-Elements verwenden
+                @Override
+                public void run() {
+
+                    _startButton.setEnabled(true);
+
+                    _ergebnisTextView.setText(finalString);
+                }
+            });
+
+        }
+
+    };
+
+    /* *************************** */
+    /* *** Ende innere Klasse  *** */
+    /* *************************** */
 
 };
