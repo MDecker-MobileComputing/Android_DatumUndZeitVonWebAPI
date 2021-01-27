@@ -1,4 +1,4 @@
-# Android-App "Zeit & Datum von Web-API"
+# Android-App "Zeit & Datum von Web-API" #
 
 Simple Android app that fetches time and date from a Web API provided by [jsontest.com](http://www.jsontest.com/#date).
 
@@ -10,7 +10,7 @@ The author of this app is *NOT* related to the developer/provider of [jsontest.c
 Identifiers (names for classes, variables and methods), UI text and (JavaDoc) comments are in German only.
 
 ----
-## Screenshots
+## Screenshots ##
 
 ![Screenshot 1](screenshot_1.png)  ![Screenshot 2](screenshot_2.png)
 
@@ -22,6 +22,6 @@ The screenshots were taken from the app running in the Android SDK's emulator.
 <br>
 
 ----
-# License
+## License ##
 
 See the [LICENSE file](LICENSE.md) for license rights and limitations (BSD 3-Clause License).
