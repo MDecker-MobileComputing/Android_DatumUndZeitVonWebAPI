@@ -152,14 +152,12 @@ public class MainActivity extends Activity {
             return "Leeres JSON-Objekt von Web-API erhalten.";
         }
 
-
         // eigentliches Parsen der JSON-Datei
         JSONObject jsonObject = new JSONObject( jsonString );
 
         // Zwei Attribute abfragen
         String zeitString  = jsonObject.getString( "time" );
         String datumString = jsonObject.getString( "date" );
-
 
         // String für Ausgabe auf UI zusammenbauen
         return "Zeit (UTC):\n"              + zeitString  +
@@ -219,7 +217,6 @@ public class MainActivity extends Activity {
                 public void run() {
 
                     _startButton.setEnabled(true);
-
                     _ergebnisTextView.setText(finalString);
                 }
             });
