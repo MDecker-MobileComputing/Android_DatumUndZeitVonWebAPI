@@ -1,6 +1,5 @@
 package de.mide.datumzeitvonwebapi;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -161,7 +160,7 @@ public class MainActivity extends Activity {
 
         // String für Ausgabe auf UI zusammenbauen
         return "Zeit (UTC):\n"              + zeitString  +
-               "\n\nDatum (MM-DD-YYYY):\n"  + datumString;
+                "\n\nDatum (MM-DD-YYYY):\n"  + datumString;
     }
 
 
@@ -190,7 +189,7 @@ public class MainActivity extends Activity {
                 String ergString = parseJSON(jsonDocument);
 
                 ergbnisDarstellen( "Ergebnis von Web-Request:\n\n" + ergString +
-                                   "\n\nAchtung: Unterschied UTC zu deutscher Zeit eine oder bei Sommerzeit zwei Stunden." );
+                        "\n\nAchtung: Unterschied UTC zu deutscher Zeit eine oder bei Sommerzeit zwei Stunden." );
             }
             catch (Exception ex) {
 
@@ -225,8 +224,7 @@ public class MainActivity extends Activity {
 
     };
 
-    /* *************************** */
-    /* *** Ende innere Klasse  *** */
-    /* *************************** */
-
-};
+/* *************************** */
+/* *** Ende innere Klasse  *** */
+/* *************************** */
+}
